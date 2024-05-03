@@ -1,6 +1,6 @@
 
 
-![logo](https://github.com/vasanthgx/petdataset_classification/blob/main/images/logo.gif)
+![logo](https://github.com/vasanthgx/pets_classification/blob/main/images/logo.gif)
 
 
 # Project Title
@@ -32,7 +32,7 @@ In this project, we have developed a machine learning pipeline that combines sta
 - **End-to-End Pipeline**: Our project provides a seamless end-to-end solution for image segmentation and breed classification, enabling users to input raw images and obtain detailed segmentation masks along with breed predictions.
 - **Model Deployment**: [We have deployed the project in  Huggingface / Spaces through Gradio Application.](https://huggingface.co/spaces/Vasanthgx/oxford_pets_breed_classification)
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/gradio.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/gradio.png)
 
 ### Implementation Details
 
@@ -51,11 +51,11 @@ Researchers and practitioners often use the Oxford-IIIT Pet Dataset for tasks su
 
 ### Dog and Cat Breeds in the dataset
 
- ![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/dataset_stats.png)
+ ![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/dataset_stats.png)
 
 ### Annotation Examples from the dataset
 
- ![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/annotation_examples.png)
+ ![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/annotation_examples.png)
 
 
 ## Evaluation and Results
@@ -77,7 +77,7 @@ from IPython.display import Image
 Image('/content/images/Abyssinian_1.jpg')
 
 ```
- ![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/sample_cat.jpg)
+ ![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/sample_cat.jpg)
 
 - Checking the size of the images and resizing them to a standard size
 
@@ -93,24 +93,24 @@ Image('/content/images/Abyssinian_1.jpg')
 
 - Let us first segment the images with Otsu Thresholding ( details in the FAQ section )
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/segmask-1.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/segmask-1.png)
 
 - We illustrate how to apply one of these thresholding algorithms. Otsu’s method calculates an “optimal” threshold (marked by a red line in the histogram below) by maximizing the variance between two classes of pixels, which are separated by the threshold. Equivalently, this threshold minimizes the intra-class variance.
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/hist.gif)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/hist.gif)
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/otsu-2.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/otsu-2.png)
 
 - If you are not familiar with the details of the different algorithms and the underlying assumptions, it is often difficult to know which algorithm will give the best results. Therefore, Scikit-image includes a function to evaluate thresholding algorithms provided by the library. At a glance, you can select the best algorithm for your data without a deep understanding of their mechanisms.
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/motsu-1.png)
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/motsu-2.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/motsu-1.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/motsu-2.png)
 
 - [Multi Otsu Thresholding](https://scikit-image.org/docs/stable/auto_examples/segmentation/plot_multiotsu.html#sphx-glr-auto-examples-segmentation-plot-multiotsu-py) The multi-Otsu threshold is a thresholding algorithm that is used to separate the pixels of an input image into several different classes, each one obtained according to the intensity of the gray levels within the image.
 
 Multi-Otsu calculates several thresholds, determined by the number of desired classes. The default number of classes is 3: for obtaining three classes, the algorithm returns two threshold values. They are represented by a red line in the histogram below.
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/motsu-3.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/motsu-3.png)
 
 
 
@@ -131,7 +131,7 @@ In an image classification task, the network assigns a label (or class) to each 
 		- Background
 		- Ambiguous Region
 		
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/segmask-tf-1.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/segmask-tf-1.png)
 
 - Pre-processing 
 
@@ -183,12 +183,12 @@ def normalize_img(data):
 - Next we make use of Pix2Pix model, which is a conditional generative adversarial network (GAN) architecture that learns a mapping from an input image to an output image. We build a upsampling model with this architecture.
 - Next we make combine both the base model(down_stack - encoder ) and upsampling model (up_stack - decoder )to build a U-Net architecturej,which is as follows
 	
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/unet.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/unet.png)
 	
 - The U-Net architecture is characterized by its symmetric encoder-decoder structure,which enables the network to capture both local and global features while preserving spatial information.
 - Building a model using the above U-Net architecture, gives us a model with the following parameters
 	
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/params.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/params.png)
 	
 - We finally fit the model with the training dataset and run it for 10 epochs
 	
@@ -201,15 +201,15 @@ def normalize_img(data):
 ```
 	- Comparing the training loss with the validation loss along with the epochs
 	
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/epochs.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/epochs.png)
 	
 
 	
 #### Evaluation
 
 - We now run the above model on the test dataset  and display the image, segmented mask and the predicted mask
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/predmask-1.png)
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/predmask-2.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/predmask-1.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/predmask-2.png)
 
 
 
@@ -233,26 +233,26 @@ def normalize_img(data):
 	```
 - Data display 
 
-![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/fastai-1.png)
+![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/fastai-1.png)
 
 - Model Training with  **resnet34** function from fastai library
 	- fine tuning with 3 epochs. We get the following error rates
 	
-	![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/er1.png)
+	![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/er1.png)
 	
 - Next we train with a different model from the timm library - **'convnext_tiny_in22k'**
 	- fine tuning with 3 epochs. We get better results than the previous one.
 	
-	![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/er2.png)
+	![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/er2.png)
 	
 - Evaluation of the classifier 
 	- with a basset hound breed of dog
 	
-	![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/basset.png)
+	![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/basset.png)
 	
 	- prediction as below
 	
-	![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/99.png)
+	![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/99.png)
 	
 	
 ### Model Deployment
@@ -270,7 +270,7 @@ def normalize_img(data):
 	```
 - Breed Classifier application
 
-	![alt text](https://github.com/vasanthgx/petdataset_classification/blob/main/images/gradio3.png)
+	![alt text](https://github.com/vasanthgx/pets_classification/blob/main/images/gradio3.png)
 	
 
 
